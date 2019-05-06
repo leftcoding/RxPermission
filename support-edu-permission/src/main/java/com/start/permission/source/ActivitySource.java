@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
-import com.start.permission.Source;
-
 public class ActivitySource extends Source {
     private Activity activity;
 

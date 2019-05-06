@@ -3,6 +3,7 @@ package com.start.permission;
 import com.start.permission.andpermission.RxAndPermission;
 import com.start.permission.launcher.AllLauncher;
 import com.start.permission.launcher.Launcher;
+import com.start.permission.source.Source;
 
 public class BootOption implements Option {
     private Source source;
