@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import com.start.permission.source.ActivitySource;
 import com.start.permission.source.ContextSource;
 import com.start.permission.source.FragmentSource;
+import com.start.permission.source.Source;
 import com.yanzhenjie.permission.AndPermission;
 
 import java.util.List;
@@ -19,15 +20,15 @@ public class RxPermission {
 
     }
 
-    public Option with(Context context) {
+    public static Option with(Context context) {
         return new BootOption(getSource(context));
     }
 
-    public Option with(Activity activity) {
+    public static Option with(Activity activity) {
         return new BootOption(new ActivitySource(activity));
     }
 
-    public Option with(Fragment fragment) {
+    public static Option with(Fragment fragment) {
         return new BootOption(new FragmentSource(fragment));
     }
 
@@ -42,21 +43,7 @@ public class RxPermission {
         return AndPermission.hasAlwaysDeniedPermission(context, permissions);
     }
 
-    /**
-     * 启动设置页
-     */
-    public static void startSetting(Fragment fragment) {
-        AndPermission.with(fragment).runtime().setting().start(RESULT_CODE);
-    }
-
-    /**
-     * 启动设置页
-     */
-    public static void startSetting(Activity activity) {
-        AndPermission.with(activity).runtime().setting().start(RESULT_CODE);
-    }
-
-    public Source getSource(Context context) {
+    private static Source getSource(Context context) {
         if (context instanceof Activity) {
             return new ActivitySource((Activity) context);
         } else if (context instanceof ContextWrapper) {

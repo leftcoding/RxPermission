@@ -3,17 +3,19 @@ package com.start.face.rxpermission;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Toast;
 
 import com.start.permission.Permissions;
 import com.start.permission.RequestCallback;
 import com.start.permission.RequestExecutor;
 import com.start.permission.Runnable;
 import com.start.permission.RxPermission;
-import com.start.permission.andpermission.RxAndPermission;
 
 import java.util.List;
 
@@ -27,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.permissions).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RxPermission.getInstance()
-                        .runtime(MainActivity.this)
+                RxPermission.with(MainActivity.this)
+                        .runtime()
                         .checkPermission(Permissions.CAMERA)
                         .rationale(new Runnable() {
                             @Override
@@ -64,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
                                     return;
                                 }
 
-                                RxPermission.getInstance()
-                                        .runtime(MainActivity.this)
+                                RxPermission.with(MainActivity.this)
+                                        .runtime()
                                         .checkPermission(Permissions.CAMERA)
                                         .rationale(new Runnable() {
                                             @Override
@@ -114,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Display setting dialog.
      */
-    public void showSettingDialog(Context context, final List<String> permissions) {
+    public void showSettingDialog(final Context context, final List<String> permissions) {
         String message = TextUtils.join("-", permissions);
 
         new AlertDialog.Builder(context).setCancelable(false)
@@ -123,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("设置", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        RxPermission.with(MainActivity.this).launcher().start(100);
                     }
                 })
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -132,5 +134,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100) {
+            Toast.makeText(MainActivity.this, "设置返回", Toast.LENGTH_SHORT).show();
+        }
     }
 }

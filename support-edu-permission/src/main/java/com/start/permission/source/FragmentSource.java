@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
-import com.start.permission.Source;
-
 public class FragmentSource extends Source {
     private Fragment fragment;
 

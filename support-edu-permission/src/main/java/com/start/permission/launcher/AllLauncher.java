@@ -1,6 +1,6 @@
 package com.start.permission.launcher;
 
-import com.start.permission.Source;
+import com.start.permission.source.Source;
 
 public class AllLauncher implements Launcher {
     private final Source source;
@@ -12,5 +12,6 @@ public class AllLauncher implements Launcher {
     @Override
     public void start(int code) {
         PlatformLauncher platformLauncher = new PlatformLauncher(source);
+        platformLauncher.start(code);
     }
 }

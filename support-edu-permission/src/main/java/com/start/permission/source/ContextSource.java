@@ -3,8 +3,6 @@ package com.start.permission.source;
 import android.content.Context;
 import android.content.Intent;
 
-import com.start.permission.Source;
-
 public class ContextSource extends Source {
     private Context context;
 

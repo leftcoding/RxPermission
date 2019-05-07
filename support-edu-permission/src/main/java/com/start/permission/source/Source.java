@@ -1,4 +1,4 @@
-package com.start.permission;
+package com.start.permission.source;
 
 import android.content.Context;
 import android.content.Intent;
