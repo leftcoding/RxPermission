@@ -26,95 +26,58 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        findViewById(R.id.permissions).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.camera).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RxPermission.with(MainActivity.this)
-                        .runtime()
-                        .checkPermission(Permissions.CAMERA)
-                        .rationale(new Runnable() {
-                            @Override
-                            public void showRationale(Context context, List<String> permissions, final RequestExecutor executor) {
-                                new AlertDialog.Builder(MainActivity.this).setCancelable(false)
-                                        .setTitle("提示")
-                                        .setMessage(TextUtils.join("-", permissions))
-                                        .setPositiveButton("授权", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                executor.execute();
-                                            }
-                                        })
-                                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-//                                                executor.cancel();
-                                            }
-                                        })
-                                        .show();
-                            }
-                        })
-                        .setCallback(new RequestCallback() {
-                            @Override
-                            public void onGranted(List<String> list) {
-
-                            }
-
-                            @Override
-                            public void onDenied(List<String> list) {
-                                if (RxPermission.hasAlwaysDeniedPermission(MainActivity.this, list)) {
-                                    showSettingDialog(MainActivity.this, list);
-                                    return;
-                                }
-
-                                RxPermission.with(MainActivity.this)
-                                        .runtime()
-                                        .checkPermission(Permissions.CAMERA)
-                                        .rationale(new Runnable() {
-                                            @Override
-                                            public void showRationale(Context context, List<String> permissions, final RequestExecutor executor) {
-                                                new AlertDialog.Builder(MainActivity.this).setCancelable(false)
-                                                        .setTitle("提示")
-                                                        .setMessage(TextUtils.join("-", permissions))
-                                                        .setPositiveButton("授权", new DialogInterface.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(DialogInterface dialog, int which) {
-                                                                executor.execute();
-                                                            }
-                                                        })
-                                                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(DialogInterface dialog, int which) {
-//                                                                executor.cancel();
-                                                            }
-                                                        })
-                                                        .show();
-                                            }
-                                        })
-                                        .setCallback(new RequestCallback() {
-                                            @Override
-                                            public void onGranted(List<String> list) {
-
-                                            }
-
-                                            @Override
-                                            public void onDenied(List<String> list) {
-                                                if (RxPermission.hasAlwaysDeniedPermission(MainActivity.this, list)) {
-                                                    showSettingDialog(MainActivity.this, list);
-                                                    return;
-                                                }
-                                                showSettingDialog(MainActivity.this, list);
-                                            }
-                                        })
-                                        .start();
-                            }
-                        })
-                        .start();
+                initPermissions();
             }
         });
     }
 
+    public void initPermissions() {
+        RxPermission.with(MainActivity.this)
+                .runtime()
+                .checkPermission(Permissions.CAMERA)
+                .rationale(new Runnable() {
+                    @Override
+                    public void showRationale(Context context, List<String> permissions, final RequestExecutor executor) {
+                        new AlertDialog.Builder(MainActivity.this).setCancelable(false)
+                                .setTitle("提示")
+                                .setMessage(TextUtils.join("-", permissions))
+                                .setPositiveButton("授权", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        executor.execute();
+                                    }
+                                })
+                                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+//                                                executor.cancel();
+                                    }
+                                })
+                                .show();
+                    }
+                })
+                .setCallback(new RequestCallback() {
+                    @Override
+                    public void onGranted(List<String> list) {
+
+                    }
+
+                    @Override
+                    public void onDenied(List<String> list) {
+                        if (RxPermission.hasAlwaysDeniedPermission(MainActivity.this, list)) {
+                            showSettingDialog(MainActivity.this, list);
+                            return;
+                        }
+                    }
+                })
+                .start();
+    }
+
     /**
-     * Display setting dialog.
+     * 打开系统权限设置界面
      */
     public void showSettingDialog(final Context context, final List<String> permissions) {
         String message = TextUtils.join("-", permissions);
@@ -131,10 +94,12 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
                     }
                 })
                 .show();
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
