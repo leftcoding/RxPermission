@@ -1,4 +1,4 @@
-package com.start.permission;
+package com.start.permission.request;
 
 public interface RequestExecutor {
 

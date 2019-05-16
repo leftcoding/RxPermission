@@ -1,4 +1,4 @@
-package com.start.permission;
+package com.start.permission.request;
 
 import java.util.List;
 

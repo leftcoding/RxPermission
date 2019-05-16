@@ -1,4 +1,6 @@
-package com.start.permission;
+package com.start.permission.request;
+
+import com.start.permission.andpermission.Runnable;
 
 public interface Request {
     Request checkPermission(String... permission);

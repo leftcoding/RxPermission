@@ -1,23 +1,22 @@
-package com.start.permission.andpermission;
+package com.start.permission.request;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.start.permission.Request;
-import com.start.permission.RequestCallback;
-import com.start.permission.Runnable;
+import com.start.permission.andpermission.Runnable;
+import com.start.permission.andpermission.RuntimeRationale;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 
 import java.util.List;
 
-public class RxAndPermission implements Request {
+public class AndRequest implements Request {
     private final Context context;
     private String[] permissions;
     private RequestCallback callback;
     private Runnable runnable;
 
-    public RxAndPermission(Context context) {
+    public AndRequest(Context context) {
         this.context = context;
     }
 

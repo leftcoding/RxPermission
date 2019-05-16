@@ -2,7 +2,6 @@ package com.start.permission.andpermission;
 
 import android.content.Context;
 
-import com.start.permission.Runnable;
 import com.yanzhenjie.permission.Rationale;
 import com.yanzhenjie.permission.RequestExecutor;
 import com.yanzhenjie.permission.runtime.Permission;
@@ -26,7 +25,7 @@ public class RuntimeRationale implements Rationale<List<String>> {
         }
     }
 
-    private final com.start.permission.RequestExecutor requestExecutor = new com.start.permission.RequestExecutor() {
+    private final com.start.permission.request.RequestExecutor requestExecutor = new com.start.permission.request.RequestExecutor() {
         @Override
         public void execute() {
             if (executor != null) {

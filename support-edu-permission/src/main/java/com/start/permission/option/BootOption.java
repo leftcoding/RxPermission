@@ -1,8 +1,9 @@
-package com.start.permission;
+package com.start.permission.option;
 
-import com.start.permission.andpermission.RxAndPermission;
 import com.start.permission.launcher.AllLauncher;
 import com.start.permission.launcher.Launcher;
+import com.start.permission.request.Request;
+import com.start.permission.request.AndRequest;
 import com.start.permission.source.Source;
 
 public class BootOption implements Option {
@@ -14,7 +15,7 @@ public class BootOption implements Option {
 
     @Override
     public Request runtime() {
-        return new RxAndPermission(source.getContext());
+        return new AndRequest(source.getContext());
     }
 
     @Override

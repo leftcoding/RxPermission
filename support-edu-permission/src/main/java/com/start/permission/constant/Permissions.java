@@ -1,4 +1,4 @@
-package com.start.permission;
+package com.start.permission.constant;
 
 import android.content.Context;
 import android.os.Build;

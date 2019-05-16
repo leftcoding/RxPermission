@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.support.v4.app.Fragment;
 
+import com.start.permission.option.BootOption;
+import com.start.permission.option.Option;
 import com.start.permission.source.ActivitySource;
 import com.start.permission.source.ContextSource;
 import com.start.permission.source.FragmentSource;
@@ -13,6 +15,10 @@ import com.yanzhenjie.permission.AndPermission;
 
 import java.util.List;
 
+/**
+ * 权限申请
+ * 底层已经做了版本判断，上层不需要判断版本
+ */
 public class RxPermission {
     public static final int RESULT_CODE = 100;
 

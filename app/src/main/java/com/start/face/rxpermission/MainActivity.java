@@ -11,10 +11,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
-import com.start.permission.Permissions;
-import com.start.permission.RequestCallback;
-import com.start.permission.RequestExecutor;
-import com.start.permission.Runnable;
+import com.start.permission.constant.Permissions;
+import com.start.permission.request.RequestCallback;
+import com.start.permission.request.RequestExecutor;
+import com.start.permission.andpermission.Runnable;
 import com.start.permission.RxPermission;
 
 import java.util.List;
